@@ -72,6 +72,7 @@ our Java library, we'll set up a Google Cloud Endpoints development server,
 and pull our jokes from there. Follow the instructions in the following
 tutorial to add a Google Could Endpoints module to your project:
 
+
 https://github.com/GoogleCloudPlatform/gradle-appengine-templates/tree/master/HelloEndpoints
 
 Introduce a project dependency between your Java library and your GCE module,
