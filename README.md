@@ -92,7 +92,6 @@ dependencies you can) from the paid flavor.
 
 ## Optional Tasks
 
-To exceed expectations, do the following:
 
 ### Add Interstitial Ad
 
