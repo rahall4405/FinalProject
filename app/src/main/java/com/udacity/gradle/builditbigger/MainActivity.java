@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
         JokeLib jokeLib = new JokeLib();
         myIntent.putExtra("joke",jokeLib.getJoke());
         startActivity(myIntent);
-        
+
        // Toast.makeText(this, jokeLib.getJoke(), Toast.LENGTH_SHORT).show();
     }
 
