@@ -1,24 +1,25 @@
 package com.udacity.gradle.builditbigger;
 
-import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
+import android.content.Context;
+
+import android.support.v4.util.Pair;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
 
-import com.example.JokeLib;
-import com.example.rahall.jokedisplay.DisplayJokeActivity;
+import com.example.rahall.jokedisplay.*;
+
 
 
 public class MainActivity extends AppCompatActivity {
-
+    private Context context;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        context = this;
     }
 
 
@@ -45,13 +46,21 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void tellJoke(View view){
-        Intent myIntent = new Intent(this, DisplayJokeActivity.class);
+        try {
+            new EndpointsAsyncTask().execute(new Pair<Context, String>(context, "Manfred"));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+            /*Intent myIntent = new Intent(this, DisplayJokeActivity.class);
 
         JokeLib jokeLib = new JokeLib();
         myIntent.putExtra("joke",jokeLib.getJoke());
-        startActivity(myIntent);
+        startActivity(myIntent);*/
 
        // Toast.makeText(this, jokeLib.getJoke(), Toast.LENGTH_SHORT).show();
+
+
     }
 
 
