@@ -20,6 +20,16 @@ import java.io.IOException;
 public class EndpointsAsyncTask extends AsyncTask<Pair<Context, String>, Void, String> {
     private static MyApi myApiService = null;
     private Context context;
+    private boolean isTest = false;
+    private OnTaskCompleted listener;
+
+    public EndpointsAsyncTask(boolean isTest) {
+        this.isTest = isTest;
+    }
+    public interface OnTaskCompleted{
+        void onTaskCompleted(String result);
+    }
+
 
     @Override
     protected String doInBackground(Pair<Context, String>... params) {
@@ -42,10 +52,10 @@ public class EndpointsAsyncTask extends AsyncTask<Pair<Context, String>, Void, S
         }
 
         context = params[0].first;
-        //String name = params[0].second;
+        String name = params[0].second;
 
         try {
-            return myApiService.sayHi("").execute().getData();
+            return myApiService.sayHi(name).execute().getData();
         } catch (IOException e) {
             return e.getMessage();
         }
@@ -54,10 +64,19 @@ public class EndpointsAsyncTask extends AsyncTask<Pair<Context, String>, Void, S
     @Override
     protected void onPostExecute(String result) {
        //Toast.makeText(context, result, Toast.LENGTH_LONG).show();
-        Intent myIntent = new Intent(context, DisplayJokeActivity.class);
+        if(!isTest) {
+            Intent myIntent = new Intent(context, DisplayJokeActivity.class);
 
-        JokeLib jokeLib = new JokeLib();
-        myIntent.putExtra("joke",jokeLib.getJoke());
-        context.startActivity(myIntent);
+            JokeLib jokeLib = new JokeLib();
+            myIntent.putExtra("joke", jokeLib.getJoke());
+            context.startActivity(myIntent);
+        } else {
+            listener.onTaskCompleted(result);
+        }
+    }
+
+    public EndpointsAsyncTask setListener(OnTaskCompleted listener) {
+        this.listener = listener;
+        return this;
     }
 }
