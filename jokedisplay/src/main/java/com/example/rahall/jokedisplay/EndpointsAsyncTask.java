@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v4.util.Pair;
+import android.view.View;
+import android.widget.ProgressBar;
 
 import com.example.JokeLib;
 import com.example.rahall4405.application.jokebackend.myApi.MyApi;
@@ -22,9 +24,11 @@ public class EndpointsAsyncTask extends AsyncTask<Pair<Context, String>, Void, S
     private Context context;
     private boolean isTest = false;
     private OnTaskCompleted listener;
+    private ProgressBar spinner;
 
-    public EndpointsAsyncTask(boolean isTest) {
+    public EndpointsAsyncTask(boolean isTest, ProgressBar spinner) {
         this.isTest = isTest;
+        this.spinner = spinner;
     }
     public interface OnTaskCompleted{
         void onTaskCompleted(String result);
@@ -53,7 +57,7 @@ public class EndpointsAsyncTask extends AsyncTask<Pair<Context, String>, Void, S
 
         context = params[0].first;
         String name = params[0].second;
-
+        android.os.SystemClock.sleep(1000);
         try {
             return myApiService.sayHi(name).execute().getData();
         } catch (IOException e) {
@@ -64,6 +68,7 @@ public class EndpointsAsyncTask extends AsyncTask<Pair<Context, String>, Void, S
     @Override
     protected void onPostExecute(String result) {
        //Toast.makeText(context, result, Toast.LENGTH_LONG).show();
+        spinner.setVisibility(View.GONE);
         if(!isTest) {
             Intent myIntent = new Intent(context, DisplayJokeActivity.class);
 

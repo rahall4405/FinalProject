@@ -15,10 +15,13 @@ import com.example.rahall.jokedisplay.*;
 
 public class MainActivity extends AppCompatActivity {
     private Context context;
+    private ProgressBar spinner;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        spinner=(ProgressBar)findViewById(R.id.progressBar);
+        spinner.setVisibility(View.GONE);
         context = this;
     }
 
@@ -46,10 +49,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void tellJoke(View view){
+        spinner.setVisibility(View.VISIBLE);
         try {
-            new EndpointsAsyncTask(false).execute(new Pair<Context, String>(context, "Manfred"));
+            new EndpointsAsyncTask(false,spinner).execute(new Pair<Context, String>(context, "Manfred"));
         } catch (Exception e) {
             e.printStackTrace();
+            spinner.setVisibility(View.GONE);
+
         }
 
             /*Intent myIntent = new Intent(this, DisplayJokeActivity.class);
