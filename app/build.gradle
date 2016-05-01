@@ -11,9 +11,10 @@ android {
         versionCode 1
         versionName "1.0"
         multiDexEnabled true
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     dexOptions {
-        javaMaxHeapSize "4g"
+        javaMaxHeapSize "6g"
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_7
@@ -42,10 +43,12 @@ android {
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
 
-    compile 'com.android.support:appcompat-v7:23.3.0'
+    compile 'com.android.support:appcompat-v7:23.1.1'
     // Added for AdMob
     compile 'com.google.android.gms:play-services:8.4.0'
-
+    androidTestCompile 'com.android.support.test:runner:0.5'
+    androidTestCompile 'com.android.support.test:rules:0.5'
+    compile 'com.google.android.gms:play-services-appindexing:8.4.0'
     compile 'com.android.support:multidex:1.0.1'
      compile project (path:':jokedisplay')
 
