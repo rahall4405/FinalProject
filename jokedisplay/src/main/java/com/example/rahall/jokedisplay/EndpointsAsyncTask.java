@@ -30,6 +30,10 @@ public class EndpointsAsyncTask extends AsyncTask<Pair<Context, String>, Void, S
         this.isTest = isTest;
         this.spinner = spinner;
     }
+    public EndpointsAsyncTask(boolean isTest) {
+        this.isTest = isTest;
+        this.spinner = null;
+    }
     public interface OnTaskCompleted{
         void onTaskCompleted(String result);
     }
@@ -57,7 +61,7 @@ public class EndpointsAsyncTask extends AsyncTask<Pair<Context, String>, Void, S
 
         context = params[0].first;
         String name = params[0].second;
-        android.os.SystemClock.sleep(1000);
+        //android.os.SystemClock.sleep(1000);
         try {
             return myApiService.sayHi(name).execute().getData();
         } catch (IOException e) {
@@ -68,8 +72,9 @@ public class EndpointsAsyncTask extends AsyncTask<Pair<Context, String>, Void, S
     @Override
     protected void onPostExecute(String result) {
        //Toast.makeText(context, result, Toast.LENGTH_LONG).show();
-        spinner.setVisibility(View.GONE);
+
         if(!isTest) {
+            spinner.setVisibility(View.GONE);
             Intent myIntent = new Intent(context, DisplayJokeActivity.class);
 
             JokeLib jokeLib = new JokeLib();

@@ -17,3 +17,25 @@ allprojects {
         jcenter()
     }
 }
+
+
+evaluationDependsOn ":app"
+evaluationDependsOn ":jokebackend"
+project(":jokebackend") {
+    appengine{
+        daemon true
+    }
+}
+// This method of tests was based on
+// http://stackoverflow.com/questions/31434928/android-gradle-task-google-appengine and
+//https://discussions.udacity.com/t/last-optional-step-how-to-start-an-external-module-task-from-the-root-build-gradle/24211
+task runAppEngine (dependsOn: [":jokebackend:appengineRun",":app:connectedCheck"]) {
+
+
+
+    tasks.getByPath(':app:connectedCheck').mustRunAfter ':jokebackend:appengineRun'
+    tasks.getByPath(':jokebackend:appengineStop').mustRunAfter ':app:connectedCheck'
+
+}
+
+runAppEngine.finalizedBy ":jokebackend:appengineStop"
