@@ -30,7 +30,7 @@ project(":jokebackend") {
 // This method of tests was based on
 // http://stackoverflow.com/questions/31434928/android-gradle-task-google-appengine and
 //https://discussions.udacity.com/t/last-optional-step-how-to-start-an-external-module-task-from-the-root-build-gradle/24211
-task runAppEngine (dependsOn: [":jokebackend:appengineRun",":app:connectedCheck"]) {
+task runTests (dependsOn: [":jokebackend:appengineRun",":app:connectedCheck"]) {
 
 
 
@@ -39,4 +39,4 @@ task runAppEngine (dependsOn: [":jokebackend:appengineRun",":app:connectedCheck"
 
 }
 
-runAppEngine.finalizedBy ":jokebackend:appengineStop"
+runTests.finalizedBy ":jokebackend:appengineStop"

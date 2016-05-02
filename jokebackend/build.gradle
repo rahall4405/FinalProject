@@ -24,7 +24,7 @@ apply plugin: 'appengine'
 dependencies {
   appengineSdk 'com.google.appengine:appengine-java-sdk:1.9.28'
     compile ('com.google.appengine:appengine-endpoints:1.9.28') {
-        exclude module: 'commons-codec', group: 'commons-codec'
+
     }
 
   compile ('com.google.appengine:appengine-endpoints-deps:1.9.28')

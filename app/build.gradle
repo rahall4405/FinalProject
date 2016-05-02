@@ -14,7 +14,7 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     dexOptions {
-        javaMaxHeapSize "6g"
+        javaMaxHeapSize "8g"
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_7
@@ -48,7 +48,7 @@ dependencies {
     compile 'com.google.android.gms:play-services:8.4.0'
     androidTestCompile 'com.android.support.test:runner:0.5'
     androidTestCompile 'com.android.support.test:rules:0.5'
-    compile 'com.google.android.gms:play-services-appindexing:8.4.0'
+
     compile 'com.android.support:multidex:1.0.1'
      compile project (path:':jokedisplay')
 

@@ -9,7 +9,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
-import android.widget.Toast;
+
 
 import com.example.rahall.jokedisplay.*;
 import com.google.android.gms.ads.AdListener;
@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
             public void onAdClosed() {
                 spinner.setVisibility(View.VISIBLE);
                 try {
-                    new EndpointsAsyncTask(false, spinner).execute(new Pair<Context, String>(context, "Manfred"));
+                    new EndpointsAsyncTask(false, spinner).execute(new Pair<>(context, "Manfred"));
                 } catch (Exception e) {
                     e.printStackTrace();
                     spinner.setVisibility(View.GONE);
