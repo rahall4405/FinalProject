@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
             public void onAdClosed() {
                 spinner.setVisibility(View.VISIBLE);
                 try {
-                    new EndpointsAsyncTask(false, spinner).execute(new Pair<>(context, "Manfred"));
+                    new EndpointsAsyncTask(false, spinner,context).execute();
                 } catch (Exception e) {
                     e.printStackTrace();
                     spinner.setVisibility(View.GONE);

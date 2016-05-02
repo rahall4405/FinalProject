@@ -19,20 +19,22 @@ import java.io.IOException;
 /**
  * Created by rahall4405 on 4/26/16.
  */
-public class EndpointsAsyncTask extends AsyncTask<Pair<Context, String>, Void, String> {
+public class EndpointsAsyncTask extends AsyncTask<Void, Void, String> {
     private static MyApi myApiService = null;
     private Context context;
     private boolean isTest = false;
     private OnTaskCompleted listener;
     private final ProgressBar spinner;
 
-    public EndpointsAsyncTask(boolean isTest, ProgressBar spinner) {
+    public EndpointsAsyncTask(boolean isTest, ProgressBar spinner,Context context) {
         this.isTest = isTest;
         this.spinner = spinner;
+        this.context = context;
     }
-    public EndpointsAsyncTask(boolean isTest) {
+    public EndpointsAsyncTask(boolean isTest,Context context) {
         this.isTest = isTest;
         this.spinner = null;
+        this.context = context;
     }
     public interface OnTaskCompleted{
         void onTaskCompleted(String result);
@@ -41,7 +43,7 @@ public class EndpointsAsyncTask extends AsyncTask<Pair<Context, String>, Void, S
 
     @SafeVarargs
     @Override
-    protected final String doInBackground(Pair<Context, String>... params) {
+    protected final String doInBackground(Void ...params) {
         if(myApiService == null) {  // Only do this once
             MyApi.Builder builder = new MyApi.Builder(AndroidHttp.newCompatibleTransport(),
                     new AndroidJsonFactory(), null)
@@ -60,11 +62,10 @@ public class EndpointsAsyncTask extends AsyncTask<Pair<Context, String>, Void, S
             myApiService = builder.build();
         }
 
-        context = params[0].first;
-        String name = params[0].second;
+
         //android.os.SystemClock.sleep(1000);
         try {
-            return myApiService.sayHi(name).execute().getData();
+            return myApiService.sayHi().execute().getData();
         } catch (IOException e) {
             return e.getMessage();
         }

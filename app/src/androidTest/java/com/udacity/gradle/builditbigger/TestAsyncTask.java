@@ -17,14 +17,14 @@ public class TestAsyncTask  extends AndroidTestCase{
     public void testAsyncTask() {
         try {
 
-            EndpointsAsyncTask endPointsAsynkTask = new EndpointsAsyncTask(true);
+            EndpointsAsyncTask endPointsAsynkTask = new EndpointsAsyncTask(true,mContext);
             endPointsAsynkTask.setListener(new EndpointsAsyncTask.OnTaskCompleted() {
 
                 @Override
                 public void onTaskCompleted(String result) {
                     testResult = result;
                 }
-            }).execute(new Pair<Context, String>(mContext, "Manfred")).get();
+            }).execute().get();
         } catch (Exception e) {
             e.printStackTrace();
         }

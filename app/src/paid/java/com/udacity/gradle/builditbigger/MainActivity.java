@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
     public void tellJoke(View view){
         spinner.setVisibility(View.VISIBLE);
         try {
-            new EndpointsAsyncTask(false,spinner).execute(new Pair<Context, String>(context, "Manfred"));
+            new EndpointsAsyncTask(false,spinner,this).execute();
         } catch (Exception e) {
             e.printStackTrace();
             spinner.setVisibility(View.GONE);
