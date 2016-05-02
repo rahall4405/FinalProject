@@ -24,7 +24,7 @@ public class EndpointsAsyncTask extends AsyncTask<Pair<Context, String>, Void, S
     private Context context;
     private boolean isTest = false;
     private OnTaskCompleted listener;
-    private ProgressBar spinner;
+    private final ProgressBar spinner;
 
     public EndpointsAsyncTask(boolean isTest, ProgressBar spinner) {
         this.isTest = isTest;
@@ -39,8 +39,9 @@ public class EndpointsAsyncTask extends AsyncTask<Pair<Context, String>, Void, S
     }
 
 
+    @SafeVarargs
     @Override
-    protected String doInBackground(Pair<Context, String>... params) {
+    protected final String doInBackground(Pair<Context, String>... params) {
         if(myApiService == null) {  // Only do this once
             MyApi.Builder builder = new MyApi.Builder(AndroidHttp.newCompatibleTransport(),
                     new AndroidJsonFactory(), null)
